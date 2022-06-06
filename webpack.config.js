@@ -1,4 +1,11 @@
+const path = require("path");
+
 module.exports = {
+    entry: "./src/index.ts",
+    output: {
+        path: path.join(__dirname, 'public'),
+        filename: 'bundle.js'
+    },
     module: {
         rules: [{
             loader: 'babel-loader',
@@ -6,10 +13,8 @@ module.exports = {
             exclude: /node_modules/
         }]
     },
-    resolve: {
-        modules: [resolve(process.cwd(), 'src'), 'node_modules'],
-        extensions: ['*', '.ts', '.tsx', '.json'],
-        symlinks: false,
-        cacheWithContext: false
+    devtool: 'cheap-module-eval-source-map',
+    devServer: {
+        contentBase: path.join(__dirname, 'public')
     }
 }
